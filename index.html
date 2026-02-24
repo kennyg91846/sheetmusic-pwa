@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sheet Music Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<header>
+    <h1>Sheet Music Catalog</h1>
+    <button id="addBtn">Add Score</button>
+</header>
+
+<main>
+    <input type="text" id="searchInput" placeholder="Search title, composer, arranger, tags...">
+
+    <section id="listView">
+        <ul id="scoreList"></ul>
+    </section>
+
+    <section id="formView" class="hidden">
+        <h2>Add / Edit Score</h2>
+        <form id="scoreForm">
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="text" id="composer" placeholder="Composer">
+            <input type="text" id="arranger" placeholder="Arranger">
+            <input type="text" id="publisher" placeholder="Publisher">
+            <input type="text" id="instrumentation" placeholder="Instrumentation">
+            <input type="text" id="voicing" placeholder="Voicing">
+            <input type="text" id="tags" placeholder="Tags (comma separated)">
+            <input type="date" id="purchaseDate">
+            <input type="number" id="licenseCount" placeholder="Copies Owned">
+            <textarea id="notes" placeholder="Notes"></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </section>
+</main>
+
+<script src="db.js" type="module"></script>
+<script src="ui.js" type="module"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("service-worker.js");
+    }
+</script>
+
+</body>
+</html>

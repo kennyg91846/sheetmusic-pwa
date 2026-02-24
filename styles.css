@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #f7f7f8;
+  color: #1f2328;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+#searchInput,
+#scoreForm input,
+#scoreForm textarea,
+#scoreForm button,
+#addBtn {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+}
+
+#addBtn,
+#scoreForm button {
+  width: auto;
+  cursor: pointer;
+  background: #111827;
+  color: #ffffff;
+  border: none;
+}
+
+#scoreList {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+#scoreList li {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  margin-bottom: 8px;
+}
+
+.hidden {
+  display: none;
+}
