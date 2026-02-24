@@ -15,6 +15,20 @@
 
 <main>
     <input type="text" id="searchInput" placeholder="Search title, composer, arranger, tags...">
+    <select id="sortSelect" aria-label="Sort scores">
+        <option value="title">Sort by Title</option>
+        <option value="composer">Sort by Composer</option>
+        <option value="liturgicalSeason">Sort by Liturgical Season</option>
+        <option value="yearPublished">Sort by Year Published</option>
+        <option value="lastPerformedDate">Sort by Last Performed Date</option>
+    </select>
+    <section id="syncControls" aria-label="Data sync controls">
+        <button id="exportBtn" type="button">Export JSON</button>
+        <button id="incrementalExportBtn" type="button">Export Incremental JSON</button>
+        <button id="importBtn" type="button">Import + Append JSON</button>
+        <input id="importFileInput" type="file" accept="application/json,.json" class="hidden">
+        <p id="syncStatus" aria-live="polite"></p>
+    </section>
 
     <section id="listView">
         <ul id="scoreList"></ul>
@@ -23,24 +37,29 @@
     <section id="formView" class="hidden">
         <h2>Add / Edit Score</h2>
         <form id="scoreForm">
-            <input type="text" id="title" placeholder="Title" required>
-            <input type="text" id="composer" placeholder="Composer">
-            <input type="text" id="arranger" placeholder="Arranger">
-            <input type="text" id="publisher" placeholder="Publisher">
-            <input type="text" id="instrumentation" placeholder="Instrumentation">
-            <input type="text" id="voicing" placeholder="Voicing">
-            <input type="text" id="tags" placeholder="Tags (comma separated)">
-            <input type="date" id="purchaseDate">
-            <input type="number" id="licenseCount" placeholder="Copies Owned">
-            <textarea id="notes" placeholder="Notes"></textarea>
+            <input type="text" id="title" placeholder="Title" aria-label="Title" required>
+            <input type="text" id="composer" placeholder="Composer" aria-label="Composer">
+            <input type="text" id="arranger" placeholder="Arranger" aria-label="Arranger">
+            <input type="text" id="publisher" placeholder="Publisher" aria-label="Publisher">
+            <input type="number" id="yearPublished" placeholder="Year Published" aria-label="Year Published">
+            <input type="text" id="voicing" placeholder="Voicing (SATB, SAB, SSA, TTBB, Unison, etc.)" aria-label="Voicing (SATB, SAB, SSA, TTBB, Unison, etc.)">
+            <input type="text" id="lastPerformedDate" placeholder="Last Performed Date" aria-label="Last Performed Date">
+            <input type="number" id="licenseCount" placeholder="Number of Copies Owned" aria-label="Number of Copies Owned">
+            <input type="text" id="liturgicalSeason" placeholder="Liturgical Season (Advent, Christmas, Lent, Palm Sunday, Maundy Thursday/Good Friday, Easter, Pentecost)" aria-label="Liturgical Season (Advent, Christmas, Lent, Palm Sunday, Maundy Thursday/Good Friday, Easter, Pentecost)">
+            <textarea id="notes" placeholder="Notes" aria-label="Notes"></textarea>
             <button type="submit">Save</button>
         </form>
     </section>
 </main>
 
-<script src="db.js" type="module"></script>
-<script src="ui.js" type="module"></script>
+<script src="db.js"></script>
+<script src="ui.js"></script>
 <script>
+    document.getElementById("addBtn")?.addEventListener("click", () => {
+        document.getElementById("listView")?.classList.add("hidden");
+        document.getElementById("formView")?.classList.remove("hidden");
+    });
+
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("service-worker.js");
     }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "sheetmusic-cache-v2";
+const CACHE_NAME = "sheetmusic-cache-v3";
 const ASSETS = [
     "./",
     "./index.html",
@@ -12,6 +12,7 @@ self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
     );
+    self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -24,10 +25,34 @@ self.addEventListener("activate", (event) => {
             )
         )
     );
+    self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
+    if (event.request.method !== "GET") {
+        return;
+    }
+
+    const requestUrl = new URL(event.request.url);
+    if (requestUrl.origin !== self.location.origin) {
+        return;
+    }
+
     event.respondWith(
-        caches.match(event.request).then((resp) => resp || fetch(event.request))
+        fetch(event.request)
+            .then((networkResponse) => {
+                const responseClone = networkResponse.clone();
+                caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, responseClone);
+                });
+                return networkResponse;
+            })
+            .catch(async () => {
+                const cachedResponse = await caches.match(event.request);
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+                return caches.match("./index.html");
+            })
     );
 });
