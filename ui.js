@@ -24,7 +24,22 @@ const incrementalExportBtn = document.getElementById("incrementalExportBtn");
 const importBtn = document.getElementById("importBtn");
 const importFileInput = document.getElementById("importFileInput");
 const syncStatus = document.getElementById("syncStatus");
+const dbStatus = document.getElementById("dbStatus");
 const LAST_SYNC_AT_KEY = "sheetmusic.lastSyncAt";
+
+function updateDbStatus(recordCount = null) {
+    if (!dbStatus) {
+        return;
+    }
+
+    if (recordCount === null) {
+        dbStatus.textContent = "Stored locally on this device/browser. Export JSON regularly to keep a backup.";
+        return;
+    }
+
+    const label = recordCount === 1 ? "record" : "records";
+    dbStatus.textContent = `Stored locally on this device/browser: ${recordCount} ${label}. Export JSON regularly to keep a backup.`;
+}
 
 document.getElementById("addBtn").onclick = () => {
     listView.classList.add("hidden");
@@ -68,6 +83,7 @@ form.onsubmit = async (e) => {
 async function loadScores(query = "", sortBy = "title") {
     if (typeof getAllScores !== "function") {
         syncStatus.textContent = "Database is not initialized. Refresh the page and try again.";
+        updateDbStatus(null);
         return;
     }
 
@@ -85,6 +101,8 @@ async function loadScores(query = "", sortBy = "title") {
         li.textContent = `${score.title} — ${score.composer}${yearText}${performedText}${seasonText}`;
         scoreList.appendChild(li);
     });
+
+    updateDbStatus(scores.length);
 }
 
 function filterScores(scores, query) {
