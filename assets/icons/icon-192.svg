@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-label="Sheet Music Catalog icon">
-  <rect width="192" height="192" rx="32" fill="#2b2b2b"/>
-  <rect x="36" y="24" width="120" height="144" rx="12" fill="#ffffff"/>
-  <line x1="54" y1="60" x2="138" y2="60" stroke="#2b2b2b" stroke-width="6"/>
-  <line x1="54" y1="84" x2="138" y2="84" stroke="#2b2b2b" stroke-width="6"/>
-  <line x1="54" y1="108" x2="138" y2="108" stroke="#2b2b2b" stroke-width="6"/>
-  <line x1="54" y1="132" x2="120" y2="132" stroke="#2b2b2b" stroke-width="6"/>
-</svg>
