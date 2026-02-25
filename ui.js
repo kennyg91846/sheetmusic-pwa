@@ -33,12 +33,12 @@ function updateDbStatus(recordCount = null) {
     }
 
     if (recordCount === null) {
-        dbStatus.textContent = "Stored locally on this device/browser. Export JSON regularly to keep a backup.";
+        dbStatus.textContent = "Program data is stored in this browser on this device and can be deleted by clearing this site's browser data. Export JSON regularly to keep a backup. Temporary until future updates.";
         return;
     }
 
     const label = recordCount === 1 ? "record" : "records";
-    dbStatus.textContent = `Stored locally on this device/browser: ${recordCount} ${label}. Export JSON regularly to keep a backup.`;
+    dbStatus.textContent = `Program data is stored in this browser on this device: ${recordCount} ${label}. Data can be deleted by clearing this site's browser data. Export JSON regularly to keep a backup. Temporary until future updates.`;
 }
 
 document.getElementById("addBtn").onclick = () => {
