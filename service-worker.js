@@ -1,4 +1,4 @@
-const CACHE_NAME = "sheetmusic-cache-v3";
+const CACHE_NAME = "sheetmusic-cache-v4";
 const ASSETS = [
     "./",
     "./index.html",
@@ -6,8 +6,8 @@ const ASSETS = [
     "./db.js",
     "./ui.js",
     "./manifest.json",
-    "./assets/icons/icon-192.svg",
-    "./assets/icons/icon-512.svg"
+    "./assets/icons/icon192.png",
+    "./assets/icons/icon512.png"
 ];
 
 self.addEventListener("install", (event) => {
